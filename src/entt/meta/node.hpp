@@ -43,6 +43,13 @@ enum class meta_traits : std::uint32_t {
     _entt_enum_as_bitmask = 0xFFFF
 };
 
+} // namespace internal
+
+template<>
+struct enum_as_bitmask<internal::meta_traits>: std::true_type {};
+
+namespace internal {
+
 template<typename Type>
 requires std::is_enum_v<Type>
 [[nodiscard]] auto meta_to_user_traits(const meta_traits traits) noexcept {

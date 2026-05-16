@@ -62,10 +62,10 @@ class view_iterator final {
     template<typename, typename...>
     friend struct extended_view_iterator;
 
-    using iterator_type = Type::const_iterator;
+    using iterator_type = typename Type::const_iterator;
     using iterator_traits = std::iterator_traits<iterator_type>;
 
-    [[nodiscard]] bool valid(const iterator_traits::value_type entt) const noexcept {
+    [[nodiscard]] bool valid(const typename iterator_traits::value_type entt) const noexcept {
         return (!Checked || (entt != tombstone))
                && ((Get == 1u) || (internal::all_of(pools.begin(), pools.begin() + index, entt) && internal::all_of(pools.begin() + index + 1, pools.end(), entt)))
                && ((Exclude == 0u) || internal::none_of(filter.begin(), filter.end(), entt));
@@ -264,7 +264,7 @@ protected:
         filter[pos] = elem;
     }
 
-    [[nodiscard]] bool none_of(const Type::entity_type entt) const noexcept {
+    [[nodiscard]] bool none_of(const typename Type::entity_type entt) const noexcept {
         return internal::none_of(filter.begin(), filter.end(), entt);
     }
 

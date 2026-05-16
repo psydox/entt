@@ -107,7 +107,7 @@ private:
         underlying_type::pop_all();
     }
 
-    underlying_iterator try_emplace(const underlying_type::entity_type entt, const bool force_back, const void *value) final {
+    underlying_iterator try_emplace(const typename underlying_type::entity_type entt, const bool force_back, const void *value) final {
         const auto it = underlying_type::try_emplace(entt, force_back, value);
 
         if(auto &reg = owner_or_assert(); it != underlying_type::base_type::end()) {
